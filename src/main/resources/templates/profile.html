@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org" xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<head>
+    <title>Profile</title>
+</head>
+<body>
+<span>Username: </span>
+<h1 th:text="${user.getUsername()}">username</h1>
+<span>Age: </span>
+<h1 th:text="${user.getAge()}">age</h1>
+
+<div><a href="/logout">logout</a></div>
+</body>
+</html>
