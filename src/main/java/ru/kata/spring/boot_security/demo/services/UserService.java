@@ -12,8 +12,6 @@ public interface UserService extends UserDetailsService {
 
     User getUserByUsername(String username);
 
-    void setEncryptedPassword(User user);
-
     List<User> getAllUsers();
 
     void update(int id, User user);

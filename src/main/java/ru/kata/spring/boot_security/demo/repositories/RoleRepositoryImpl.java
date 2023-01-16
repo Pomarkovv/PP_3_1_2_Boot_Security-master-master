@@ -32,4 +32,9 @@ public class RoleRepositoryImpl implements RoleRepository{
     public List<Role> getAllRoles() {
         return em.createQuery("select rl from Role rl", Role.class).getResultList();
     }
+
+    @Override
+    public Role getRoleById(int roleId) {
+        return em.find(Role.class, roleId);
+    }
 }

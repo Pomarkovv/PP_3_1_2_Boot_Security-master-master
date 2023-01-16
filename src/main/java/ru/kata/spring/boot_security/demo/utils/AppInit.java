@@ -32,6 +32,7 @@ public class AppInit implements CommandLineRunner {
         List<Role> rolesAdm = new ArrayList<>();
 
         roles.add(userRole);
+        roles.add(adminRole);
         rolesAdm.add(adminRole);
 
         User user = new User("ivan", 20, "12345", roles);

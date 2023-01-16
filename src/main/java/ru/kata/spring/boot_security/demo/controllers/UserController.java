@@ -11,15 +11,15 @@ import ru.kata.spring.boot_security.demo.services.UserService;
 @RequestMapping("/user")
 public class UserController {
 
-    private UserService us;
+    private final UserService userService;
 
-    public UserController(UserService us) {
-        this.us = us;
+    public UserController(UserService userService) {
+        this.userService = userService;
     }
 
     @GetMapping("/{id}")
     public String getProfile(@PathVariable(name = "id") int id, Model model) {
-        model.addAttribute("user", us.getUserById(id));
+        model.addAttribute("user", userService.getUserById(id));
         return "profile";
     }
 }

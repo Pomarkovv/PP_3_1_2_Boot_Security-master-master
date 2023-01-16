@@ -9,7 +9,7 @@ import java.util.List;
 
 @Service
 public class RoleServiceImpl implements RoleService{
-    private RoleRepository roleRepository;
+    private final RoleRepository roleRepository;
 
     public RoleServiceImpl(RoleRepository roleRepository) {
         this.roleRepository = roleRepository;
@@ -30,6 +30,12 @@ public class RoleServiceImpl implements RoleService{
     @Override
     public List<Role> getAllRoles() {
         return roleRepository.getAllRoles();
+    }
+
+    @Override
+    @Transactional
+    public Role getRoleById(int roleId) {
+        return roleRepository.getRoleById(roleId);
     }
 
 

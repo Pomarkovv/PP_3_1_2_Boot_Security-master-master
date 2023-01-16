@@ -12,13 +12,16 @@
   <label for="age">Enter age: </label>
   <input type="text" th:field="*{age}" id="age"/>
   <br/>
+    <label for="password">Enter new password: </label>
+    <input type="password" th:field="*{password}" id="password"/>
+    <br/>
   <input type="submit" value="Update!"/>
     <p>
         <label>Roles:
-            <input type="checkbox" name="roleList"
+            <input type="checkbox" name="roles"
                    th:each="role : ${roles}"
                    th:text="${role.name}"
-                   th:value="${role.name}"
+                   th:value="${role.id}"
                    th:field="*{roles}"
             />
         </label>
