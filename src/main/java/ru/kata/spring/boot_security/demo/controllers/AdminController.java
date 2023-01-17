@@ -8,6 +8,7 @@ import ru.kata.spring.boot_security.demo.models.User;
 import ru.kata.spring.boot_security.demo.services.RoleService;
 import ru.kata.spring.boot_security.demo.services.UserService;
 
+import java.security.Principal;
 import java.util.*;
 
 @Controller
@@ -23,8 +24,12 @@ public class AdminController {
     }
 
     @GetMapping()
-    public String getAllUsers(Model model) {
+    public String getAllUsers(Model model, Principal principal) {
+        User user = userService.getUserByUsername(principal.getName());
         model.addAttribute("users", userService.getAllUsers());
+        model.addAttribute("current", user);
+        model.addAttribute("newUser", new User());
+        model.addAttribute("roles", roleService.getAllRoles());
         return "allUsers";
     }
 
@@ -50,7 +55,7 @@ public class AdminController {
         return "redirect:/admin";
     }
 
-    @DeleteMapping("/{id}")
+    @DeleteMapping("/user-delete/{id}")
     public String delete(@PathVariable("id") int id){
         userService.removeUser(id);
         return "redirect:/admin";

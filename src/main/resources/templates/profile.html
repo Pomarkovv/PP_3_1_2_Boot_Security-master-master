@@ -1,14 +1,64 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org" xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
 <head>
-    <title>Profile</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+          crossorigin="anonymous">
+    <title>User page</title>
 </head>
 <body>
-<span>Username: </span>
-<h1 th:text="${user.getUsername()}">username</h1>
-<span>Age: </span>
-<h1 th:text="${user.getAge()}">age</h1>
 
-<div><a href="/logout">logout</a></div>
+<!-- Шапка сайта -->
+<header class="navbar navbar-dark bg-dark">
+    <div class="text-white float-left">
+        <span class="font-weight-bold" th:text="${user.getUsername()}">username</span> with roles:
+        <span th:text="${user.getRoles().get(0).name}">roles</span>
+    </div>
+    <div class="float-right">
+        <form th:action="@{/logout}" method="get">
+            <button type="submit" class="btn btn-link text-secondary">Logout</button>
+        </form>
+    </div>
+</header>
+
+<div class="container-fluid mt-4 pr-5">
+    <div class="row">
+        <div class="list-group col-2">
+            <a sec:authorize="hasRole('ROLE_ADMIN')" href="/admin" class="list-group-item list-group-item-action border-0 text-primary">Admin</a>
+            <a href="#" class="list-group-item active rounded-sm">User</a>
+        </div>
+        <div class="col-10">
+            <h1 class="pb-2">User information-page</h1>
+            <div class="border rounded">
+                <h4 class="p-3 m-0">About user</h4><hr class="m-0">
+                <div class="p-4">
+                    <table class="table table-striped">
+                        <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Username</th>
+                            <th>Age</th>
+                            <th>Role</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            <td th:text="${user.id}">id</td>
+                            <td th:text="${user.username}">name</td>
+                            <td th:text="${user.age}">age</td>
+                            <td th:text="${user.getRoles().get(0).getName()}"></td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
 </body>
 </html>
+
