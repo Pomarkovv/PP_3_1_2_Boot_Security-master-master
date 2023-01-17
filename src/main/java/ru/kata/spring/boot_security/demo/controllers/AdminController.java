@@ -35,7 +35,7 @@ public class AdminController {
         return "editUser";
     }
 
-    @PatchMapping("/{id}/edit")
+    @PostMapping("/{id}/edit")
     public String update(@ModelAttribute("user") User user,
                          @PathVariable("id") int id,
                          @ModelAttribute("roles") List<Integer> rolesId) {
@@ -68,7 +68,6 @@ public class AdminController {
         for (int roleId : rolesId) {
             roles.add(roleService.getRoleById(roleId));
         }
-        user.getRoles().clear();
         user.setRoles(roles);
         userService.save(user);
         return "redirect:/admin";
